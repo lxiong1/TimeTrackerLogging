@@ -1,0 +1,31 @@
+{
+    "Lue Xiong": {
+    	"email" : "lxiong@tapqa.com",
+    	"client" : "Gracenote:Software Tester (LX)"
+    },
+
+    "Steve Momcilovic": {
+    	"email" : "smomcilovic@tapqa.com",
+    	"client" : "Family Wizard:Sr. Automation QA (SM)"
+    },
+
+	"Ryan Seifert": {
+		"email" : "rseifert@tapqa.com",
+		"client" : "Cox Media:Tester (RS)"
+	},
+
+    "Tony Ashford": {
+    	"email" : "tashford@tapqa.com",
+    	"client" : "Mayo:Software Tester (AA)"
+    },
+        
+    "Colin Skow": {
+    	"email" : "cskow@tapqa.com",
+    	"client" : "Senseonics:Software Tester (CGS)"
+    },
+
+    "Chee Lee": {
+    	"email" : "clee@tapqa.com",
+    	"client" : "Gracenote:Software Tester (CML)"
+    }
+}
