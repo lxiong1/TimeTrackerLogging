@@ -21,6 +21,7 @@ REQUIREMENTS
 	*If NOT using keyring, please remove anything keyring related in the script and replace it with your own password variable and value
 *ADD your user profile in JSON file provided if it doesn't exist and format it accordingly
 	*This will include your name, email, and client(s)
+*CHANGE JSON file path to your local path in python script
 
 RUNNING THE SCRIPT
 ------------------
