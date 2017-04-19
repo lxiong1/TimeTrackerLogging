@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-with open("C:/Users/luexi/Desktop/TimeTrackerLogging/eBillityUserProfiles.json") as json_data:
+with open("C:/Users/luexi/Desktop/TimeTrackerLogging/TimeTrackerLogging/eBillityUserProfiles.json") as json_data:
     employee_data = json.load(json_data)
 
 your_name = input("Hello, What Is Your First and Last Name?: ").title().strip()
@@ -35,6 +35,7 @@ wait = WebDriverWait(driver, 10)
 
 # necessary to set dummy window size for finding elements even though it is headless browser
 # driver.set_window_size(1120, 550)
+
 driver.get("https://ebillity.com")
 driver.maximize_window()
 
@@ -92,19 +93,15 @@ def get_iterated_log_box_three():
 
 def billable_checkbox(c):
     billable_checkbox_uncheck = driver.find_elements_by_css_selector(".w-row .bill input")[0:5]
-    print(billable_checkbox_uncheck)
 
     # Any client containing string "Unbillable" will uncheck the billable checkbox
     if "Unbillable" in c():
         if c == get_client:
             billable_checkbox_uncheck[0].click()
-            print(billable_checkbox_uncheck[0])
         elif c == get_client_two:
             billable_checkbox_uncheck[2].click()
-            print(billable_checkbox_uncheck[2])
         elif c == get_client_three:
             billable_checkbox_uncheck[4].click()
-            print(billable_checkbox_uncheck[4])
 
 def make_a_comment(c):
     comment = input("Would You Like To Leave A Comment For Your Logged Hours? If Not, Leave This Blank: ").strip()
@@ -124,7 +121,17 @@ def make_a_comment(c):
     if comment == "":
         pass
 
-#Still trying to figure out solution to replace time.sleep();  code runs faster than what is visually seen in browser
+def save_submit_quit():
+    save_button = driver.find_element_by_id("btnSave")
+    save_button.click()
+
+    submit_weekly_timesheet = wait.until(EC.element_to_be_clickable((By.ID, "btnSubmit")))
+    submit_weekly_timesheet.click()
+    print("Logging Hours Finished")
+
+    driver.quit()
+    raise SystemExit
+
 def get_timesheet_user_profile(c):
     customer_dropdown = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))
     time.sleep(0.5)
@@ -190,10 +197,10 @@ def y_response(log_box, user_profile, comment, checkbox, c):
     comment(c)
 
 def n_response(log_box, user_profile, comment, checkbox, c):
-    print("Please Specify Your Hours Per Weekday")
     user_profile(c)
     checkbox(c)
 
+    print("Please Specify Your Hours Per Weekday")
     specified_monday_hours_input = input("Enter Your Hours For Monday: ").strip()
     specified_tuesday_hours_input = input("Enter Your Hours For Tuesday: ").strip()
     specified_wednesday_hours_input = input("Enter Your Hours For Wednesday: ").strip()
@@ -231,36 +238,26 @@ def c_response():
     copy_last_timesheet.click()
     copy_button = driver.find_element_by_css_selector("div.buttons-panel.popup button.ctrl_btn.btn_green")
     copy_button.click()
+    #copying takes time to register
     time.sleep(1)
-    print("Logging Hours Finished")
 
-    save_button = driver.find_element_by_id("btnSave")
-    save_button.click()
-
-    driver.quit()
-    raise SystemExit
+    save_submit_quit()
 
 def lw_response():
-    last_week_response = input("Did You Forget To Log Your Hours For Last Week? (y/n): ").strip()
-    if last_week_response == "y":
-        date_dropdown = wait.until(EC.visibility_of_element_located((By.ID, "ddlDateRange")))
-        date_dropdown.click()
-        date_dropdown.send_keys(Keys.ARROW_UP + Keys.RETURN)
-        normal_last_week_response = input("Did You Work The Normal 8 Hours A Day This Week For {}? (y/n/lw): ".format(client)).strip()
-        if normal_last_week_response == "y":
-            y_response(get_iterated_log_box)
-        elif normal_last_week_response == "n":
-            n_response(get_iterated_log_box)
-    elif last_week_response == "n":
-        normal_week_response = input("Did You Work The Normal 8 Hours A Day This Week For {}? (y/n/lw): ".format(client)).strip()
-        if normal_week_response == "y":
-            y_response(get_iterated_log_box)
-        elif normal_week_response == "n":
-            n_response(get_iterated_log_box)
-        elif normal_week_response == "lw":
-            lw_response()
+    date_dropdown = wait.until(EC.visibility_of_element_located((By.ID, "ddlDateRange")))
+    date_dropdown.click()
+    date_dropdown.send_keys(Keys.ARROW_UP + Keys.RETURN)
 
-    make_a_comment(get_client)
+    normal_last_week_response = input("Okay, Did You Work The Normal 8 Hours A Day *LAST* Week For {}? (y/n/c/lw): ".format(client)).strip()
+    if normal_last_week_response == "y":
+        y_response(get_iterated_log_box, get_timesheet_user_profile, make_a_comment, billable_checkbox, get_client)
+    elif normal_last_week_response == "n":
+        n_response(get_iterated_log_box, get_timesheet_user_profile, make_a_comment, billable_checkbox, get_client)
+
+    check_for_client_two(get_client_two)
+    unbillable_client_three(get_client_three)
+
+    save_submit_quit()
 
 def check_for_client_two(c):
     if c() != "":
@@ -282,7 +279,7 @@ def unbillable_client_three(c):
 
 # initiate question for user input to trigger the if statements
 print("y = Yes, " + "n = No, " + "c = Copy (Copy Last Week's Timesheet), " + "lw = Last Week (If You Forgot Last Week)")
-normal_week_response = input("Did You Work The Normal 8 Hours A Day This Week As {}? (y/n/c/lw): ".format(client)).strip()
+normal_week_response = input("Did You Work The Normal 8 Hours A Day This Week For {}? (y/n/c/lw): ".format(client)).strip()
 
 # if yes, sends 8 hours each for Monday-Friday; otherwise specify hours
 if normal_week_response == "y":
@@ -297,12 +294,4 @@ elif normal_week_response == "lw":
 check_for_client_two(get_client_two)
 unbillable_client_three(get_client_three)
 
-save_button = driver.find_element_by_id("btnSave")
-save_button.click()
-
-# submit_weekly_timesheet = wait.until(EC.element_to_be_clickable((By.ID, "btnSubmit")))
-# submit_weekly_timesheet.click()
-
-print("Logging Hours Finished")
-
-driver.quit()
+save_submit_quit()
