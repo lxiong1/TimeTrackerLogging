@@ -39,11 +39,9 @@ wait = WebDriverWait(driver, 10)
 driver.get("https://ebillity.com")
 driver.maximize_window()
 
-# login credentials
 email = employee_data[your_name]["email"]
 keyring.set_password("system", "username", "password")
 
-# click login toggle button
 login_toggle = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'loginToggle')))
 login_toggle.click()
 
