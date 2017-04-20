@@ -15,10 +15,6 @@ REQUIREMENTS
 	*Use the command in the command line to install ChromeDriver
 		pip install chromedriver_installer
 *ADD/CHANGE email in JSON file according to your eBillity login credentials
-*ADD/ENCRYPT password for python script
-	*Note: I am using the keyring library to encrypt my password from the command line; it is not necessary but recommended
-	*For information on how to setup keyring ((https://pypi.python.org/pypi/keyring))
-	*If NOT using keyring, please remove anything keyring related in the script and replace it with your own password variable and value
 *ADD your user profile in JSON file provided if it doesn't exist and format it accordingly
 	*This will include your name, email, and client(s)
 

@@ -1,6 +1,7 @@
 import time
 import json
 import keyring
+import getpass
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
@@ -40,14 +41,14 @@ driver.get("https://ebillity.com")
 driver.maximize_window()
 
 email = employee_data[your_name]["email"]
-keyring.set_password("system", "username", "password")
+password = getpass.getpass(stream = None)
 
 login_toggle = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'loginToggle')))
 login_toggle.click()
 
 login_email_field = wait.until(EC.element_to_be_clickable((By.ID, "emailAddress")))
 login_email_field.click()
-login_email_field.send_keys(email + Keys.TAB + keyring.get_password("system", "password") + Keys.RETURN)
+login_email_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
 
 close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
 close_pop_up.click()
