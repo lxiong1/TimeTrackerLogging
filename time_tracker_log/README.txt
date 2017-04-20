@@ -3,7 +3,7 @@ Please look at the requirements below for running the script.
 
 REQUIREMENTS
 ------------
-*Python Interpreter (*Already in dependencies folder*)
+*Install Python Interpreter (*Already in dependencies folder*)
 	*NECESSARY to add python interpreter to PATH when installing; this makes the python interpreter a system environment variable to compile python code
 	*By default, Pip (package installer for Python) comes with python interpreter
 *Download and Install Selenium WebDriver for Python
