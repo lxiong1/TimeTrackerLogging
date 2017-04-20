@@ -8,9 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-open("../../Desktop/time_tracker_log/dependencies/selenium-server-standalone-3.3.1.jar")
-
-with open("C:../../Desktop/time_tracker_log/eBillityUserProfiles.json") as json_data:
+with open("../../Desktop/time_tracker_log/eBillityUserProfiles.json") as json_data:
     employee_data = json.load(json_data)
 
 your_name = input("Hello, What Is Your First and Last Name?: ").title().strip()
