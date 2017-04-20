@@ -1,0 +1,43 @@
+{
+    "Lue Xiong": {
+    	"email" : "lxiong@tapqa.com",
+    	"client" : "Unbillable:Bench Time",
+    	"client_two" : "Gracenote:Software Tester (LX)",
+    	"client_three" : "Unbillable"
+    },
+
+    "Steve Momcilovic": {
+    	"email" : "smomcilovic@tapqa.com",
+    	"client" : "Family Wizard:Sr. Automation QA (SM)",
+    	"client_two" : "",
+    	"client_three" : "Unbillable"
+    },
+
+	"Ryan Seifert": {
+		"email" : "rseifert@tapqa.com",
+		"client" : "Cox Media:Tester (RS)",
+		"client_two" : "",
+    	"client_three" : "Unbillable"
+	},
+
+    "Tony Ashford": {
+    	"email" : "tashford@tapqa.com",
+    	"client" : "Mayo:Software Tester (AA)",
+    	"client_two" : "",
+    	"client_three" : "Unbillable"
+    },
+        
+    "Colin Skow": {
+    	"email" : "cskow@tapqa.com",
+    	"client" : "Senseonics:Software Tester (CGS)",
+    	"client_two" : "",
+    	"client_three" : "Unbillable"
+    },
+
+    "Chee Lee": {
+    	"email" : "clee@tapqa.com",
+    	"client" : "Gracenote:Software Tester (CML)",
+    	"client_two" : "",
+    	"client_three" : "Unbillable"
+    }
+}
