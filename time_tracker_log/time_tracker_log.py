@@ -1,6 +1,5 @@
 import time
 import json
-import keyring
 import getpass
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
@@ -22,12 +21,6 @@ elif your_name in employee_data:
     print("Okay {}, Pulling Your Profile... Please Wait For Further Instructions As Script Is Now Running".format(your_name))
 
 desktop_executor = "http://127.0.0.1:4444/wd/hub/"
-# desired_caps_values = {"browserName" : "phantomjs",
-#                        "platform" : "WINDOWS",
-#                        "javascriptEnabled" : True,
-#                        "cssSelectorsEnabled" : True,
-#                        "phantomjs.binary.path" : "C:/Users/luexi/AppData/Roaming/npm/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs.exe"
-#                        }
 
 driver = webdriver.Remote(
     command_executor = desktop_executor,
@@ -35,9 +28,6 @@ driver = webdriver.Remote(
 )
 
 wait = WebDriverWait(driver, 10)
-
-# necessary to set dummy window size for finding elements even though it is headless browser
-# driver.set_window_size(1120, 550)
 
 driver.get("https://ebillity.com")
 driver.maximize_window()
