@@ -1,4 +1,4 @@
-The script is written in python for the purposes of automating hours on eBillity through a headless browser using PhantomnJS Driver.
+The script is written in python for the purposes of automating hours on eBillity.
 Please look at the requirements below for running the script.
 
 REQUIREMENTS
