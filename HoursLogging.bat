@@ -2,5 +2,5 @@
 title Ebillity-Time Tracker
 pip install selenium==3.3.3
 pip install chromedriver
-start C:.\StandAloneServer.bat %*
+start C:.\InvisibleBAT.vbs %*
 python C:.\time_tracker_log.py %*

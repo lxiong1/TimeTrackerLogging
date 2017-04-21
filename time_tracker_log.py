@@ -31,7 +31,7 @@ driver.get("https://ebillity.com")
 driver.maximize_window()
 
 email = employee_data[your_name]["email"]
-password = getpass.getpass(stream = None)
+password = getpass.getpass()
 
 login_toggle = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'loginToggle')))
 login_toggle.click()
