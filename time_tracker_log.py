@@ -124,54 +124,48 @@ def save_submit_quit():
     raise SystemExit
 
 def get_timesheet_user_profile(c):
-    customer_dropdown = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))
-    time.sleep(0.5)
+    customer_dropdown = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))
     customer_dropdown.click()
-    customer_dropdown_search_field = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#select2-drop .select2-search .select2-input")))
+    customer_dropdown_search_field = driver.find_element_by_css_selector("#select2-drop .select2-search .select2-input")
     customer_dropdown_search_field.send_keys(c())
-    time.sleep(1.5)
+    time.sleep(1)
     customer_dropdown_search_field.send_keys(Keys.RETURN)
 
-    service_item_dropdown = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")))
-    time.sleep(0.5)
+    service_item_dropdown = driver.find_element_by_css_selector(".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")
     service_item_dropdown.click()
-    service_item_dropdown_search_field = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#select2-drop .select2-search .select2-input")))[0]
+    service_item_dropdown_search_field = driver.find_elements_by_css_selector("#select2-drop .select2-search .select2-input")[0]
     service_item_dropdown_search_field.send_keys(c())
-    time.sleep(1.5)
+    time.sleep(1)
     service_item_dropdown_search_field.send_keys(Keys.RETURN)
 
 def get_timesheet_user_profile_two(c):
     customer_dropdown = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))[2]
-    time.sleep(0.5)
     customer_dropdown.click()
-    customer_dropdown_search_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#select2-drop .select2-search .select2-input")))
+    customer_dropdown_search_field = driver.find_element_by_css_selector("#select2-drop .select2-search .select2-input")
     customer_dropdown_search_field.send_keys(c())
-    time.sleep(1.5)
+    time.sleep(1)
     customer_dropdown_search_field.send_keys(Keys.RETURN)
 
-    service_item_dropdown = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")))[1]
-    time.sleep(0.5)
+    service_item_dropdown = driver.find_elements_by_css_selector(".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")[1]
     service_item_dropdown.click()
-    service_item_dropdown_search_field = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#select2-drop .select2-search .select2-input")))[0]
+    service_item_dropdown_search_field = driver.find_elements_by_css_selector("#select2-drop .select2-search .select2-input")[0]
     service_item_dropdown_search_field.send_keys(c())
-    time.sleep(1.5)
+    time.sleep(1)
     service_item_dropdown_search_field.send_keys(Keys.RETURN)
 
 def get_timesheet_user_profile_three(c):
     customer_dropdown = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))[4]
-    time.sleep(0.5)
     customer_dropdown.click()
-    customer_dropdown_search_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#select2-drop .select2-search .select2-input")))
+    customer_dropdown_search_field = driver.find_element_by_css_selector("#select2-drop .select2-search .select2-input")
     customer_dropdown_search_field.send_keys(c())
-    time.sleep(1.5)
+    time.sleep(1)
     customer_dropdown_search_field.send_keys(Keys.RETURN)
 
-    service_item_dropdown = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")))[2]
-    time.sleep(0.5)
+    service_item_dropdown = driver.find_elements_by_css_selector(".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")[2]
     service_item_dropdown.click()
-    service_item_dropdown_search_field = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#select2-drop .select2-search .select2-input")))[0]
+    service_item_dropdown_search_field = driver.find_elements_by_css_selector("#select2-drop .select2-search .select2-input")[0]
     service_item_dropdown_search_field.send_keys(c())
-    time.sleep(1.5)
+    time.sleep(1)
     service_item_dropdown_search_field.send_keys(Keys.RETURN)
 
 def y_response(log_box, user_profile, comment, checkbox, c):
