@@ -4,10 +4,13 @@ Please look at the requirements below for running the script.
 REQUIREMENTS
 ------------
 *PLACE downloaded/cloned time_tracker_log folder on desktop
-*INSTALL Python Interpreter (Already in C:Users\<ProfileName>\Desktop\time_tracker_log\Python Install)
+*INSTALL Python Interpreter if you don't have it (Already provided in Python_Java_Install folder)
 	*NECESSARY to add python interpreter to PATH when installing; this makes the python interpreter a system environment variable to compile python code
-	*Make sure to download 32-bit or 64-bit corresponding to your computer's specifications
+	*Make sure to download 32-bit or 64-bit corresponding to your computer's specifications.
+*INSTALL Java if you don't have it (Already provided in Python_Java_Install folder)
+	*This is used to run the selenium remote driver
 *MOVE provided chromedriver.exe to C:\Python36\Scripts
+	*IF you previously had chromedriver installed, make sure THIS chromedriver provided is used as it is the latest version
 *ADD/CHANGE email in JSON file according to your eBillity login credentials
 *ADD your user profile in JSON file provided if it doesn't exist and format it accordingly
 	*This will include your name, email, and client(s)

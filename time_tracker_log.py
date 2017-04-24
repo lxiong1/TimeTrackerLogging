@@ -43,7 +43,10 @@ login_email_field.click()
 login_email_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
 
 close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
-close_pop_up.click()
+if close_pop_up != None:
+	close_pop_up.click()
+elif close_pop_up == None:
+	pass
 
 entries_tab = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_menubar_EntriesNavLabel")))
 entries_tab.click()
