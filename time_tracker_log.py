@@ -54,10 +54,6 @@ if auto_save_off.is_selected():
 else:
     auto_save_off.click()
 
-client = employee_data[your_name]["client"]
-client_two = employee_data[your_name]["client_two"]
-client_three = employee_data[your_name]["client_three"]
-
 def get_client():
     client = employee_data[your_name]["client"]
     return client
@@ -125,6 +121,7 @@ def save_submit_quit():
 
 def get_timesheet_user_profile(c):
     customer_dropdown = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))
+    time.sleep(0.25)
     customer_dropdown.click()
     customer_dropdown_search_field = driver.find_element_by_css_selector("#select2-drop .select2-search .select2-input")
     customer_dropdown_search_field.send_keys(c())
@@ -132,6 +129,7 @@ def get_timesheet_user_profile(c):
     customer_dropdown_search_field.send_keys(Keys.RETURN)
 
     service_item_dropdown = driver.find_element_by_css_selector(".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")
+    time.sleep(0.25)
     service_item_dropdown.click()
     service_item_dropdown_search_field = driver.find_elements_by_css_selector("#select2-drop .select2-search .select2-input")[0]
     service_item_dropdown_search_field.send_keys(c())
@@ -140,6 +138,7 @@ def get_timesheet_user_profile(c):
 
 def get_timesheet_user_profile_two(c):
     customer_dropdown = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))[2]
+    time.sleep(0.25)
     customer_dropdown.click()
     customer_dropdown_search_field = driver.find_element_by_css_selector("#select2-drop .select2-search .select2-input")
     customer_dropdown_search_field.send_keys(c())
@@ -147,6 +146,7 @@ def get_timesheet_user_profile_two(c):
     customer_dropdown_search_field.send_keys(Keys.RETURN)
 
     service_item_dropdown = driver.find_elements_by_css_selector(".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")[1]
+    time.sleep(0.25)
     service_item_dropdown.click()
     service_item_dropdown_search_field = driver.find_elements_by_css_selector("#select2-drop .select2-search .select2-input")[0]
     service_item_dropdown_search_field.send_keys(c())
@@ -155,6 +155,7 @@ def get_timesheet_user_profile_two(c):
 
 def get_timesheet_user_profile_three(c):
     customer_dropdown = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".w-row-qbo .select2-container.combo-weekly .select2-chosen")))[4]
+    time.sleep(0.25)
     customer_dropdown.click()
     customer_dropdown_search_field = driver.find_element_by_css_selector("#select2-drop .select2-search .select2-input")
     customer_dropdown_search_field.send_keys(c())
@@ -162,6 +163,7 @@ def get_timesheet_user_profile_three(c):
     customer_dropdown_search_field.send_keys(Keys.RETURN)
 
     service_item_dropdown = driver.find_elements_by_css_selector(".w-row-qbo .activity .select2-container.combo-weekly .select2-chosen")[2]
+    time.sleep(0.25)
     service_item_dropdown.click()
     service_item_dropdown_search_field = driver.find_elements_by_css_selector("#select2-drop .select2-search .select2-input")[0]
     service_item_dropdown_search_field.send_keys(c())
@@ -233,7 +235,7 @@ def lw_response():
     date_dropdown.click()
     date_dropdown.send_keys(Keys.ARROW_UP + Keys.RETURN)
 
-    normal_last_week_response = input("Okay, Did You Work The Normal 8 Hours A Day *LAST* Week For {}? (y/n/c/lw): ".format(client)).strip()
+    normal_last_week_response = input("Okay, Did You Work The Normal 8 Hours A Day *LAST* Week For {}? (y/n/c/lw): ".format(get_client())).strip()
     if normal_last_week_response == "y":
         y_response(get_iterated_log_box, get_timesheet_user_profile, make_a_comment, billable_checkbox, get_client)
     elif normal_last_week_response == "n":
@@ -246,7 +248,7 @@ def lw_response():
 
 def check_for_client_two(c):
     if c() != "":
-        normal_week_response_two = input("Did You Work The Normal 8 Hours A Day This Week For {}? (y/n): ".format(client_two)).strip()
+        normal_week_response_two = input("Did You Work The Normal 8 Hours A Day This Week For {}? (y/n): ".format(c())).strip()
         if normal_week_response_two == "y":
             y_response(get_iterated_log_box_two, get_timesheet_user_profile_two, make_a_comment, billable_checkbox, get_client_two)
         elif normal_week_response_two == "n":
@@ -256,7 +258,7 @@ def check_for_client_two(c):
 
 def unbillable_client_three(c):
     if c() != "":
-        normal_week_response_three = input("Did You Have Holiday/PTO For {}? (y/n): ".format(client_three)).strip()
+        normal_week_response_three = input("Did You Have Holiday/PTO For {}? (y/n): ".format(c())).strip()
         if normal_week_response_three == "y":
             n_response(get_iterated_log_box_three, get_timesheet_user_profile_three, make_a_comment, billable_checkbox, get_client_three)
         elif normal_week_response_three == "n" or "":
@@ -264,7 +266,7 @@ def unbillable_client_three(c):
 
 # initiate question for user input to trigger the if statements
 print("y = Yes, " + "n = No, " + "c = Copy (Copy Last Week's Timesheet), " + "lw = Last Week (If You Forgot Last Week)")
-normal_week_response = input("Did You Work The Normal 8 Hours A Day This Week For {}? (y/n/c/lw): ".format(client)).strip()
+normal_week_response = input("Did You Work The Normal 8 Hours A Day This Week For {}? (y/n/c/lw): ".format(get_client())).strip()
 
 # if yes, sends 8 hours each for Monday-Friday; otherwise specify hours
 if normal_week_response == "y":
