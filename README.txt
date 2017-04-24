@@ -7,7 +7,6 @@ REQUIREMENTS
 *INSTALL Python Interpreter (Already in C:Users\<ProfileName>\Desktop\time_tracker_log\Python Install)
 	*NECESSARY to add python interpreter to PATH when installing; this makes the python interpreter a system environment variable to compile python code
 	*Make sure to download 32-bit or 64-bit corresponding to your computer's specifications
-	*By default, Pip (package installer for Python) comes with python interpreter
 *MOVE provided chromedriver.exe to C:\Python36\Scripts
 *ADD/CHANGE email in JSON file according to your eBillity login credentials
 *ADD your user profile in JSON file provided if it doesn't exist and format it accordingly
