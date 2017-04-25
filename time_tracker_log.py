@@ -20,8 +20,7 @@ store_your_name = get_your_name()
 
 while store_your_name not in employee_data:
 	print("Please Enter Valid Name")
-	name = input("What Is Your First and Last Name?: ").title().strip()
-	store_your_name = name
+	store_your_name = get_your_name()
 else:
 	print("Okay {}, Pulling Your Profile... Please Wait For Further Instructions As Script Is Now Running".format(store_your_name))
 
@@ -39,7 +38,7 @@ driver.maximize_window()
 driver.set_window_position(-2000, 0)
 
 email = employee_data[store_your_name]["email"]
-password = getpass.getpass()_
+password = getpass.getpass()
 print("Logging In...")
 
 login_toggle = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'loginToggle')))
@@ -47,7 +46,7 @@ login_toggle.click()
 
 login_email_field = wait.until(EC.element_to_be_clickable((By.ID, "emailAddress")))
 login_email_field.click()
-login_email_field.send_keys(email + Keys.TAB + store_your_password + Keys.RETURN)
+login_email_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
 
 try:
 	close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
