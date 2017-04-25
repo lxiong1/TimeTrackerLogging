@@ -42,10 +42,10 @@ login_email_field = wait.until(EC.element_to_be_clickable((By.ID, "emailAddress"
 login_email_field.click()
 login_email_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
 
-close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
-if close_pop_up != None:
+try:
+	close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
 	close_pop_up.click()
-elif close_pop_up == None:
+finally:
 	pass
 
 entries_tab = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_menubar_EntriesNavLabel")))
@@ -261,7 +261,7 @@ def check_for_client_two(c):
 
 def unbillable_client_three(c):
     if c() != "":
-        normal_week_response_three = input("Did You Have Holiday/PTO For {}? (y/n): ".format(c())).strip()
+        normal_week_response_three = input("Did You Have Any {} Hours? (y/n): ".format(c())).strip()
         if normal_week_response_three == "y":
             n_response(get_iterated_log_box_three, get_timesheet_user_profile_three, make_a_comment, billable_checkbox, get_client_three)
         elif normal_week_response_three == "n" or "":
