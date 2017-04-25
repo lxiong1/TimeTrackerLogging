@@ -2,5 +2,4 @@
 title Ebillity-Time Tracker
 pip install selenium==3.3.3
 start C:.\HideBat.vbs %*
-python C:.\time_tracker_log.py %*
-pause
+start C:.\time_tracker_log.py %*
