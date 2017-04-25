@@ -3,6 +3,7 @@ import json
 import getpass
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
@@ -11,12 +12,18 @@ from selenium.webdriver.support import expected_conditions as EC
 with open("../../Desktop/time_tracker_log/eBillityUserProfiles.json") as json_data:
     employee_data = json.load(json_data)
 
-your_name = input("Hello, What Is Your First and Last Name?: ").title().strip()
-if your_name not in employee_data:
-    print("Name Is Invalid, Please Enter Valid Name...")
-    your_name = input("What Is Your First and Last Name?: ").title().strip()
-elif your_name in employee_data:
-    print("Okay {}, Pulling Your Profile... Please Wait For Further Instructions As Script Is Now Running".format(your_name))
+def get_your_name():
+	your_name = input("What Is Your First and Last Name?: ").title().strip()
+	return your_name
+
+store_your_name = get_your_name()
+
+while store_your_name not in employee_data:
+	print("Please Enter Valid Name")
+	name = input("What Is Your First and Last Name?: ").title().strip()
+	store_your_name = name
+else:
+	print("Okay {}, Pulling Your Profile... Please Wait For Further Instructions As Script Is Now Running".format(store_your_name))
 
 desktop_executor = "http://127.0.0.1:4444/wd/hub/"
 
@@ -31,8 +38,8 @@ driver.get("https://ebillity.com")
 driver.maximize_window()
 driver.set_window_position(-2000, 0)
 
-email = employee_data[your_name]["email"]
-password = getpass.getpass()
+email = employee_data[store_your_name]["email"]
+password = getpass.getpass()_
 print("Logging In...")
 
 login_toggle = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'loginToggle')))
@@ -40,7 +47,7 @@ login_toggle.click()
 
 login_email_field = wait.until(EC.element_to_be_clickable((By.ID, "emailAddress")))
 login_email_field.click()
-login_email_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
+login_email_field.send_keys(email + Keys.TAB + store_your_password + Keys.RETURN)
 
 try:
 	close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
@@ -58,15 +65,15 @@ else:
     auto_save_off.click()
 
 def get_client():
-    client = employee_data[your_name]["client"]
+    client = employee_data[store_your_name]["client"]
     return client
 
 def get_client_two():
-    client_two = employee_data[your_name]["client_two"]
+    client_two = employee_data[store_your_name]["client_two"]
     return client_two
 
 def get_client_three():
-    client_three = employee_data[your_name]["client_three"]
+    client_three = employee_data[store_your_name]["client_three"]
     return client_three
 
 def get_iterated_log_box():
