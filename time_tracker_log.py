@@ -13,8 +13,8 @@ with open("../../Desktop/time_tracker_log/eBillityUserProfiles.json") as json_da
     employee_data = json.load(json_data)
 
 def get_your_name():
-	your_name = input("What Is Your First and Last Name?: ").title().strip()
-	return your_name
+    your_name = input("What Is Your First and Last Name?: ").title().strip()
+    return your_name
 
 store_your_name = get_your_name()
 
@@ -33,7 +33,7 @@ driver = webdriver.Remote(
 
 wait = WebDriverWait(driver, 10)
 
-driver.get("https://ebillity.com")
+driver.get("https://secure.ebillity.com/firm4.0/login.aspx")
 driver.maximize_window()
 driver.set_window_position(-2000, 0)
 
@@ -41,12 +41,8 @@ email = employee_data[store_your_name]["email"]
 password = getpass.getpass()
 print("Logging In...")
 
-login_toggle = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'loginToggle')))
-login_toggle.click()
-
-login_email_field = wait.until(EC.element_to_be_clickable((By.ID, "emailAddress")))
-login_email_field.click()
-login_email_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
+credentials_field = driver.find_element_by_id("txtEmail")
+credentials_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
 
 try:
 	close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
