@@ -17,7 +17,6 @@ def get_your_name():
     return your_name
 
 store_your_name = get_your_name()
-
 while store_your_name not in employee_data:
 	print("Please Enter Valid Name")
 	store_your_name = get_your_name()
@@ -35,14 +34,29 @@ wait = WebDriverWait(driver, 10)
 
 driver.get("https://secure.ebillity.com/firm4.0/login.aspx")
 driver.maximize_window()
-driver.set_window_position(-2000, 0)
+# driver.set_window_position(-2000, 0)
 
 email = employee_data[store_your_name]["email"]
 password = getpass.getpass()
-print("Logging In...")
+store_your_password = password
 
-credentials_field = driver.find_element_by_id("txtEmail")
-credentials_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
+validation = True
+while validation:
+    credentials_field = driver.find_element_by_id("txtEmail")
+    credentials_field.send_keys(email + Keys.TAB + store_your_password + Keys.RETURN)
+    print("Logging In...")
+
+    if TimeoutException:
+        try:
+            invalid_credentials = wait.until(EC.visibility_of_element_located((By.ID, "messageDiv")))
+        except:
+            break;
+        if invalid_credentials.is_displayed:
+            print("Login Failed, Please Enter Valid Password")
+            password = getpass.getpass()
+            store_your_password = password
+        else:
+            validation = False
 
 try:
 	close_pop_up = wait.until(EC.element_to_be_clickable((By.ID, "ctl00_ContentPlaceHolder1_imagClose")))
