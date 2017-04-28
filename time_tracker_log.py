@@ -12,16 +12,13 @@ from selenium.webdriver.support import expected_conditions as EC
 with open("../../Desktop/time_tracker_log/eBillityUserProfiles.json") as json_data:
     employee_data = json.load(json_data)
 
-def get_your_name():
-    your_name = input("What Is Your First and Last Name?: ").title().strip()
-    return your_name
+your_name = input("What Is Your First and Last Name?: ").title().strip()
 
-store_your_name = get_your_name()
-while store_your_name not in employee_data:
+while your_name not in employee_data:
 	print("Please Enter Valid Name")
-	store_your_name = get_your_name()
+	your_name = input("What Is Your First and Last Name?: ").title().strip()
 else:
-	print("Okay {}, Pulling Your Profile... Please Wait For Further Instructions As Script Is Now Running".format(store_your_name))
+	print("Okay {}, Pulling Your Profile... Please Wait For Further Instructions As Script Is Now Running".format(your_name))
 
 desktop_executor = "http://127.0.0.1:4444/wd/hub/"
 
@@ -36,14 +33,13 @@ driver.get("https://secure.ebillity.com/firm4.0/login.aspx")
 driver.maximize_window()
 # driver.set_window_position(-2000, 0)
 
-email = employee_data[store_your_name]["email"]
+email = employee_data[your_name]["email"]
 password = getpass.getpass()
-store_your_password = password
 
 validation = True
 while validation:
     credentials_field = driver.find_element_by_id("txtEmail")
-    credentials_field.send_keys(email + Keys.TAB + store_your_password + Keys.RETURN)
+    credentials_field.send_keys(email + Keys.TAB + password + Keys.RETURN)
     print("Logging In...")
 
     if TimeoutException:
@@ -54,7 +50,6 @@ while validation:
         if invalid_credentials.is_displayed:
             print("Login Failed, Please Enter Valid Password")
             password = getpass.getpass()
-            store_your_password = password
         else:
             validation = False
 
@@ -74,15 +69,15 @@ else:
     auto_save_off.click()
 
 def get_client():
-    client = employee_data[store_your_name]["client"]
+    client = employee_data[your_name]["client"]
     return client
 
 def get_client_two():
-    client_two = employee_data[store_your_name]["client_two"]
+    client_two = employee_data[your_name]["client_two"]
     return client_two
 
 def get_client_three():
-    client_three = employee_data[store_your_name]["client_three"]
+    client_three = employee_data[your_name]["client_three"]
     return client_three
 
 def get_iterated_log_box():
