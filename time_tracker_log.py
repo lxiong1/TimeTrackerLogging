@@ -2,7 +2,6 @@ import time
 import json
 import getpass
 from selenium import webdriver
-from selenium.webdriver import DesiredCapabilities
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -22,16 +21,13 @@ else:
 
 desktop_executor = "http://127.0.0.1:4444/wd/hub/"
 
-driver = webdriver.Remote(
-    command_executor = desktop_executor,
-    desired_capabilities = DesiredCapabilities.CHROME
-)
+driver = webdriver.Chrome(executable_path="chromedriver")
 
 wait = WebDriverWait(driver, 10)
 
 driver.get("https://secure.ebillity.com/firm4.0/login.aspx")
 driver.maximize_window()
-# driver.set_window_position(-2000, 0)
+driver.set_window_position(-2000, 0)
 
 email = employee_data[your_name]["email"]
 password = getpass.getpass()
