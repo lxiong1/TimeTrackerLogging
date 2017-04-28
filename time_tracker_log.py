@@ -188,6 +188,7 @@ def y_response(log_box, user_profile, comment, checkbox, c):
     print("Logging Your Normal Weekly Hours Now...")
     user_profile(c)
     checkbox(c)
+    
     logHour = "8"
     log_box()
     for day in log_box():
