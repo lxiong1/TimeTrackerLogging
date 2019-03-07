@@ -1,10 +1,9 @@
-The script is written in python for the purposes of automating hours on eBillity.
-Please look at the requirements below for running the script.
+The script is written in python for the purposes of automating hour logging on eBillity.
 
 REQUIREMENTS
 ------------
-*PLACE downloaded/cloned time_tracker_log folder on desktop
-*INSTALL Python Interpreter if you don't have it (Already provided in Python_Java_Install folder)
+- Clone repository to your desktop
+- Install Python Interpreter if you don't have it (Already provided in Python_Java_Install folder)
 	*NECESSARY to add python interpreter to PATH when installing; this makes the python interpreter a system environment variable to compile python code
 	*Make sure to download 32-bit or 64-bit corresponding to your computer's specifications.
 *INSTALL Java if you don't have it (Already provided in Python_Java_Install folder)
